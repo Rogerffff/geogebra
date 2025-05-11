@@ -22,6 +22,10 @@ val e2eTestImplementation: Configuration by configurations.getting
 e2eTestImplementation.extendsFrom(configurations.testImplementation.get())
 
 dependencies {
+    // ✅ 添加 JUnit Jupiter API（JUnit 5）
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.2")
+    testImplementation("org.mockito:mockito-core:5.12.0")
     implementation("org.geogebra:common")
     implementation("org.geogebra:common-jre")
     implementation(project(":editor-desktop"))
@@ -82,6 +86,7 @@ run {
 
 tasks {
     test {
+        useJUnitPlatform() // ✅ 重要！启用 JUnit 5 平台
         ignoreFailures = true
         outputs.upToDateWhen { false }
     }
